@@ -39,6 +39,7 @@ client/coverage
 
 # production
 client/build
+/public
 
 # misc
 .DS_Store
