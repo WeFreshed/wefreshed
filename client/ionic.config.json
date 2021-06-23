@@ -1,0 +1,7 @@
+{
+  "name": "weef",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
