@@ -29,7 +29,6 @@ class Api::SessionsController < ApplicationController
         cookies.signed[:jwt] = {
           value: token,
           httponly: true,
-          domain: Rails.application.credentials[Rails.env.to_sym][:cookie_domain],
           same_site: Rails.env.to_sym == :production ? :none : :lax,
           secure: Rails.env.to_sym == :production
         }
