@@ -36,7 +36,7 @@ const User: React.FC = () => {
 
         <IonCard>
           <IonCardContent>
-            <p>User id: {state?.user?.name}</p>
+            <p>User id: {state?.user?.id}</p>
           </IonCardContent>
         </IonCard>
 

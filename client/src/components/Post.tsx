@@ -53,7 +53,7 @@ const Post: React.FC<PostProps> = ({ post, dispatch }) => {
           color="secondary"
           onClick={toggleActive}
         >
-          Disable
+          {post.is_active ? 'Disable' : 'Enable'}
         </IonItemOption>
         <IonItemOption
           onClick={handleDelete}

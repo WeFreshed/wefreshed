@@ -62,7 +62,7 @@ export const createPost = (post: IPostParams) => {
 }
 
 export const deletePost = (post: IPost) => {
-  return fetch('/api/posts/${post.id}', {
+  return fetch(`/api/posts/${post.id}`, {
     method: 'DELETE',
     credentials: 'include',
     headers: {
@@ -78,7 +78,7 @@ export const deletePost = (post: IPost) => {
 }
 
 export const updatePost = (post: IPost) => {
-  return fetch('/api/posts/${post.id}', {
+  return fetch(`/api/posts/${post.id}`, {
     method: 'PATCH',
     credentials: 'include',
     headers: {
