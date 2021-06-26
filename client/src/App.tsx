@@ -8,7 +8,7 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactHashRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 
-import { getSession, login } from './services/api';
+import { getSession } from './services/api';
 import { getCurrentPosition } from './services/location'
 import { DataContext, LocationContext } from './context';
 import { reducer, initialState } from './store';

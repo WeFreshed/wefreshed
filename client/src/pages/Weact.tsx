@@ -64,15 +64,6 @@ const Page: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    const unsubscribeX = x.onChange(() => {
-      const childNode = cardElem.current
-      // console.log(childNode?.getBoundingClientRect(), content?.current?.getBoundingClientRect(), xVelocity)
-    })
-
-    return () => unsubscribeX()
-  })
-
   const handleWeaction = async (direction: Direction) => {
     if (currentPost) {
       const params = {
