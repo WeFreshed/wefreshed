@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 user1 = User.create(name: 'Test User 1', device_id: '1234', latitude: 41.9707917, longitude: -87.7219368)
 user2 = User.create(name: 'Test User 2', device_id: '4321', latitude: 37.7749917, longitude: 122.4194683)
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Weaction < ApplicationRecord
   belongs_to :post
   belongs_to :user
@@ -25,16 +27,25 @@ class Weaction < ApplicationRecord
   end
 
   def weef?(post)
-    matched_weaction = Weaction.joins("INNER JOIN posts ON weactions.post_id = posts.id WHERE weactions.is_match = 't' AND weactions.is_active = 't' AND weactions.user_id = #{post.user_id} AND posts.user_id = #{user_id}").first || false
+    matched_weaction = Weaction.joins(sql(post)).first || false
 
-    if !matched_weaction
-      return false
-    end
+    return false unless matched_weaction
 
     weef = Weef.create(weactor_id: id, weactee_id: matched_weaction.id)
     matched_weaction.update(is_active: false, weef_id: weef.id)
     update(is_active: false, weef_id: weef.id)
 
-    return true
+    true
+  end
+
+  def sql(post)
+    `%{
+      INNER JOIN posts
+      ON weactions.post_id = posts.id
+      WHERE weactions.is_match = 't'
+      AND weactions.is_active = 't'
+      AND weactions.user_id = #{post.user_id}
+      AND posts.user_id = #{user_id}
+    }`
   end
 end
