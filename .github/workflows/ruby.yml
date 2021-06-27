@@ -19,6 +19,8 @@ jobs:
       - uses: ruby/setup-ruby@master
         with:
           ruby-version: 2.7.2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: Install postgres client
         run: sudo apt-get install libpq-dev
       - name: Cache Ruby Gems
