@@ -1,7 +1,5 @@
-
 import { IPost, IPostParams, IWeactionParams } from '../types'
 import { getDeviceId } from '../services/device'
-
 
 export const login = async () => {
   try {
@@ -12,11 +10,11 @@ export const login = async () => {
       body: JSON.stringify({ device_id }),
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     })
     const json = await response.json()
     return json
-  } catch(err) {
+  } catch (err) {
     console.log(err)
     return Promise.reject(err)
   }
@@ -26,20 +24,22 @@ export const getSession = () => {
   return fetch('/api/sessions', {
     method: 'GET',
     credentials: 'include',
-  }).then(response => {
-    if (response.ok) {
-      return response.json()
-    } else {
-      console.log(response)
-      if (response.status === 401) {
-        return login()
-      } else {
-        throw response
-      }
-    }
-  }).catch(err => {
-    console.log(err)
   })
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.log(response)
+        if (response.status === 401) {
+          return login()
+        } else {
+          throw response
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 export const createPost = (post: IPostParams) => {
@@ -47,12 +47,12 @@ export const createPost = (post: IPostParams) => {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({
-      ...post
+      ...post,
     }),
     headers: {
       'Content-Type': 'application/json',
-    }
-  }).then(response => {
+    },
+  }).then((response) => {
     if (response.ok) {
       return response.json()
     } else {
@@ -67,8 +67,8 @@ export const deletePost = (post: IPost) => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-    }
-  }).then(response => {
+    },
+  }).then((response) => {
     if (response.ok) {
       return response.json()
     } else {
@@ -85,9 +85,9 @@ export const updatePost = (post: IPost) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      ...post
+      ...post,
     }),
-  }).then(response => {
+  }).then((response) => {
     if (response.ok) {
       return response.json()
     } else {
@@ -100,7 +100,7 @@ export const getPosts = () => {
   return fetch('/api/posts', {
     method: 'GET',
     credentials: 'include',
-  }).then(response => {
+  }).then((response) => {
     if (response.ok) {
       return response.json()
     } else {
@@ -117,9 +117,9 @@ export const createWeaction = (weaction: IWeactionParams) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      ...weaction
+      ...weaction,
     }),
-  }).then(response => {
+  }).then((response) => {
     if (response.ok) {
       return response.json()
     } else {

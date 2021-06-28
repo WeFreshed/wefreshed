@@ -7,18 +7,26 @@ import {
   IonListHeader,
   IonMenu,
   IonMenuToggle,
-} from '@ionic/react';
+} from '@ionic/react'
 
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp } from 'ionicons/icons';
-import './Menu.css';
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import {
+  archiveOutline,
+  archiveSharp,
+  bookmarkOutline,
+  heartOutline,
+  heartSharp,
+  mailOutline,
+  mailSharp,
+} from 'ionicons/icons'
+import './Menu.css'
 
 interface AppPage {
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-  title: string;
+  url: string
+  iosIcon: string
+  mdIcon: string
+  title: string
 }
 
 const appPages: AppPage[] = [
@@ -26,26 +34,26 @@ const appPages: AppPage[] = [
     title: 'User',
     url: '/user',
     iosIcon: mailOutline,
-    mdIcon: mailSharp
+    mdIcon: mailSharp,
   },
   {
     title: 'Posts',
     url: '/posts',
     iosIcon: heartOutline,
-    mdIcon: heartSharp
+    mdIcon: heartSharp,
   },
   {
     title: 'Weact',
     url: '/weact',
     iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    mdIcon: archiveSharp,
   },
-];
+]
 
-const labels = ['Amused', 'Angry', 'Meh', 'Sad'];
+const labels = ['Amused', 'Angry', 'Meh', 'Sad']
 
 const Menu: React.FC = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -55,12 +63,24 @@ const Menu: React.FC = () => {
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                <IonItem
+                  className={
+                    location.pathname === appPage.url ? 'selected' : ''
+                  }
+                  routerLink={appPage.url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
+                  <IonIcon
+                    slot="start"
+                    ios={appPage.iosIcon}
+                    md={appPage.mdIcon}
+                  />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
-            );
+            )
           })}
         </IonList>
 
@@ -75,7 +95,7 @@ const Menu: React.FC = () => {
         </IonList>
       </IonContent>
     </IonMenu>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

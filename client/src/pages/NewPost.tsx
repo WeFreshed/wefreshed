@@ -14,26 +14,26 @@ import {
   IonList,
   IonListHeader,
   IonRadio,
-  IonRadioGroup
-} from "@ionic/react"
+  IonRadioGroup,
+} from '@ionic/react'
 import { useHistory } from 'react-router'
-import React, { useState, useContext } from "react"
+import React, { useState, useContext } from 'react'
 import { DataContext, LocationContext } from '../context'
 import { createPost } from '../services/api'
-import { IPostParams} from '../types'
-import "./Page.css"
+import { IPostParams } from '../types'
+import './Page.css'
 
 const NewPost: React.FC = () => {
-  const { action, push, goBack } = useHistory<{ action: string; }>();
-  const location = useContext(LocationContext);
-  const { dispatch } = useContext(DataContext);
-  
+  const { action, push, goBack } = useHistory<{ action: string }>()
+  const location = useContext(LocationContext)
+  const { dispatch } = useContext(DataContext)
+
   const initialPost = {
     text: '',
     emotion_id: null,
-  };
+  }
 
-  const [post, setPost] = useState<IPostParams>(initialPost);
+  const [post, setPost] = useState<IPostParams>(initialPost)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -41,7 +41,7 @@ const NewPost: React.FC = () => {
     const _post = await createPost({
       ...post,
       latitude: location?.latitude,
-      longitude: location?.longitude
+      longitude: location?.longitude,
     })
 
     dispatch({ type: 'ADD_POST', post: _post })
@@ -59,7 +59,7 @@ const NewPost: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            { action === 'PUSH' ? (
+            {action === 'PUSH' ? (
               <IonBackButton defaultHref="/" />
             ) : (
               <IonMenuButton />
@@ -75,8 +75,8 @@ const NewPost: React.FC = () => {
             <IonTitle size="large">New Post</IonTitle>
           </IonToolbar>
         </IonHeader>
-        
-        <form onSubmit={handleSubmit} >
+
+        <form onSubmit={handleSubmit}>
           <IonList lines="full">
             <IonListHeader>
               <IonLabel>Text</IonLabel>
@@ -89,13 +89,17 @@ const NewPost: React.FC = () => {
                 autoGrow
                 required
                 rows={3}
-                onIonChange={e => setPost({...post, text: e.detail.value || ''})}
+                onIonChange={(e) =>
+                  setPost({ ...post, text: e.detail.value || '' })
+                }
               />
             </IonItem>
 
             <IonRadioGroup
               value={post.emotion_id}
-              onIonChange={e => setPost({...post, emotion_id: e.detail.value})}
+              onIonChange={(e) =>
+                setPost({ ...post, emotion_id: e.detail.value })
+              }
             >
               <IonListHeader>
                 <IonLabel>Emotion</IonLabel>
@@ -121,19 +125,14 @@ const NewPost: React.FC = () => {
                 <IonRadio slot="end" value={4} />
               </IonItem>
             </IonRadioGroup>
-
           </IonList>
-          <IonButton
-            type="submit"
-            expand="full"
-            fill="outline"
-          >
+          <IonButton type="submit" expand="full" fill="outline">
             Create Post
           </IonButton>
         </form>
       </IonContent>
     </IonPage>
-  );
-};
+  )
+}
 
-export default NewPost;
+export default NewPost

@@ -8,16 +8,16 @@ import {
   IonToolbar,
   IonList,
   IonButton,
-  IonIcon
-} from "@ionic/react"
-import React, { useContext } from "react"
+  IonIcon,
+} from '@ionic/react'
+import React, { useContext } from 'react'
 import { addCircleOutline } from 'ionicons/icons'
-import "./Page.css"
+import './Page.css'
 import { DataContext } from '../context'
 import Post from '../components/Post'
 
 const Posts: React.FC = () => {
-  const { state, dispatch } = useContext(DataContext);
+  const { state, dispatch } = useContext(DataContext)
 
   return (
     <IonPage>
@@ -28,11 +28,8 @@ const Posts: React.FC = () => {
           </IonButtons>
           <IonTitle>Posts</IonTitle>
           <IonButtons slot="primary">
-            <IonButton color="secondary" routerLink="/posts/new" >
-              <IonIcon
-                slot="icon-only"
-                icon={addCircleOutline}
-              />
+            <IonButton color="secondary" routerLink="/posts/new">
+              <IonIcon slot="icon-only" icon={addCircleOutline} />
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -52,7 +49,7 @@ const Posts: React.FC = () => {
         </IonList>
       </IonContent>
     </IonPage>
-  );
-};
+  )
+}
 
-export default Posts;
+export default Posts

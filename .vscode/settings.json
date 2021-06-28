@@ -1,0 +1,15 @@
+{
+  "eslint.workingDirectories": ["./client"],
+  "eslint.options": {
+  },
+  "prettier.configPath": "./client/.prettierrc",
+  "prettier.prettierPath": "./client/node_modules/prettier/index.js",
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.debug": true,
+  "eslint.alwaysShowStatus": true,
+  "prettier.arrowParens": "avoid"
+}
