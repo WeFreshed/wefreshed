@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  has_many :posts
-  has_many :weactions
+  has_many :posts, dependent: :destroy
+  has_many :weactions, dependent: :destroy
 
   validates :device_id, presence: true, allow_nil: false
-  validates :device_id, uniqueness: true
 
   def self.handle_login(device_id)
     user = User.find_or_create(device_id)
     if user
       token = JsonWebToken.encode({ user_id: user.id }, 4.hours.from_now)
-      return { user: user, token: token }
+      { user: user, token: token }
     else
-      return { user: false, token: false }
+      { user: false, token: false }
     end
   end
 

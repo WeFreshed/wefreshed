@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :api do
     get '/sessions', to: 'sessions#index'
@@ -12,5 +14,5 @@ Rails.application.routes.draw do
     post '/weactions', to: 'weactions#create'
   end
 
-  get "/*path" => proc { [200, {}, [ActionView::Base.new.render(file: "public/index.html")]] }
+  get '/*path' => proc { [200, {}, [ActionView::Base.new.render(file: 'public/index.html')]] }
 end

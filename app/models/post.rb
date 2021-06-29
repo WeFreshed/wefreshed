@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :weactions
+  has_many :weactions, dependent: :destroy
 
   validates :emotion_id, numericality: {
     only_integer: true,
