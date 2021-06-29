@@ -5,9 +5,9 @@ import { initialState } from '../store'
 export const LocationContext = createContext<ILocation>(defaultLocation)
 
 export const DataContext = createContext<{
-  state: IStore;
+  state: IStore
   dispatch: React.Dispatch<any>
-}>({ 
+}>({
   state: initialState,
-  dispatch: () => null
+  dispatch: () => null,
 })

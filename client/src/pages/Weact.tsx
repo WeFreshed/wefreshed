@@ -10,20 +10,20 @@ import {
   IonCardContent,
   IonFooter,
   IonButton,
-  IonIcon
-} from "@ionic/react";
+  IonIcon,
+} from '@ionic/react'
 import {
   arrowDownCircleOutline,
   arrowUpCircleOutline,
   arrowForwardCircleOutline,
-  arrowBackCircleOutline
-} from 'ionicons/icons';
-import React, { useState, useEffect, useContext, useRef } from "react";
+  arrowBackCircleOutline,
+} from 'ionicons/icons'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { IPost, Direction } from '../types'
 import { LocationContext } from '../context'
 import * as Api from '../services/api'
 
-import { motion, useMotionValue, useAnimation } from "framer-motion";
+import { motion, useMotionValue, useAnimation } from 'framer-motion'
 
 import './Weact.css'
 
@@ -31,7 +31,7 @@ const Page: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([])
   const [currentPost, setCurrentPost] = useState<IPost | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const location = useContext(LocationContext);
+  const location = useContext(LocationContext)
   const content = useRef<HTMLIonContentElement | null>(null)
   const cardElem = useRef<HTMLDivElement | null>(null)
   const x = useMotionValue(0)
@@ -42,7 +42,7 @@ const Page: React.FC = () => {
     setCurrentPost(_post)
     setPosts(_posts)
     if (!_posts.length) {
-      getPosts().then(posts => setPosts(posts))
+      getPosts().then((posts) => setPosts(posts))
     }
   }
 
@@ -51,16 +51,16 @@ const Page: React.FC = () => {
       setError(null)
       const fetchedPosts = await Api.getPosts()
       return fetchedPosts
-    } catch(err) {
+    } catch (err) {
       setError('Something went wrong 😞')
     }
   }
 
   useEffect(() => {
-    if (null !== content.current){
+    if (null !== content.current) {
       console.log(content?.current?.getBoundingClientRect())
     }
-    getPosts().then(posts => posts && _setPosts(posts))
+    getPosts().then((posts) => posts && _setPosts(posts))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -70,25 +70,31 @@ const Page: React.FC = () => {
         post_id: currentPost.id,
         direction,
         latitude: location.latitude,
-        longitude: location.longitude
+        longitude: location.longitude,
       }
       try {
         await Api.createWeaction(params)
         _setPosts(posts)
-      } catch(err) {
+      } catch (err) {
         console.log(error)
       }
     }
   }
 
-  const handleDragEnd = async (event: any, info: { offset: { x: number; y: number; }; velocity: { x: number; y: number; }; }) => {
+  const handleDragEnd = async (
+    event: any,
+    info: {
+      offset: { x: number; y: number }
+      velocity: { x: number; y: number }
+    },
+  ) => {
     const offsetX = info.offset.x
     const velocityX = info.velocity.x
     const offsetY = info.offset.y
     const velocityY = info.velocity.y
 
-    let direction: Direction | null = null;
-    let transition;
+    let direction: Direction | null = null
+    let transition
 
     if (offsetY < -100 || velocityY < -100) {
       console.log('swipe up')
@@ -107,7 +113,7 @@ const Page: React.FC = () => {
       transition = { x: 1000 }
       direction = 'left'
     }
-    
+
     if (direction) {
       try {
         await handleWeaction(direction)
@@ -122,7 +128,7 @@ const Page: React.FC = () => {
       }
     }
   }
-  
+
   if (error) {
     return <p>{error}</p>
   }
@@ -163,9 +169,7 @@ const Page: React.FC = () => {
         >
           <IonCard className="full-height">
             <IonCardContent>
-              {posts.length &&
-                  <p>{posts[0].text}</p>
-              }
+              {posts.length && <p>{posts[0].text}</p>}
             </IonCardContent>
           </IonCard>
         </motion.div>
@@ -173,24 +177,24 @@ const Page: React.FC = () => {
 
       <IonFooter>
         <IonToolbar>
-        <IonButtons>
-          <IonButton onClick={() => handleWeaction('down')}>
-            <IonIcon slot="icon-only" icon={arrowDownCircleOutline} />
-          </IonButton>
-          <IonButton onClick={() => handleWeaction('left')}>
-            <IonIcon slot="icon-only" icon={arrowBackCircleOutline} />
-          </IonButton>
-          <IonButton onClick={() => handleWeaction('right')}>
-            <IonIcon slot="icon-only" icon={arrowForwardCircleOutline} />
-          </IonButton>
-          <IonButton onClick={() => handleWeaction('up')}>
-            <IonIcon slot="icon-only" icon={arrowUpCircleOutline} />
-          </IonButton>
-        </IonButtons>
+          <IonButtons>
+            <IonButton onClick={() => handleWeaction('down')}>
+              <IonIcon slot="icon-only" icon={arrowDownCircleOutline} />
+            </IonButton>
+            <IonButton onClick={() => handleWeaction('left')}>
+              <IonIcon slot="icon-only" icon={arrowBackCircleOutline} />
+            </IonButton>
+            <IonButton onClick={() => handleWeaction('right')}>
+              <IonIcon slot="icon-only" icon={arrowForwardCircleOutline} />
+            </IonButton>
+            <IonButton onClick={() => handleWeaction('up')}>
+              <IonIcon slot="icon-only" icon={arrowUpCircleOutline} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonFooter>
     </IonPage>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page
