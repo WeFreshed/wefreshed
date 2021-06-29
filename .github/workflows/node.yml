@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [14.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,4 +30,5 @@ jobs:
         run: |
           cd client
           npm install
-          npm run test    
+          npm run lint
+          npm run test
