@@ -41,6 +41,6 @@ jobs:
           bundler exec rails db:create RAILS_ENV=test
           bundler exec rails db:migrate RAILS_ENV=test
       - name: Run Linter
-        run: gem install rubocop && rubocop
+        run: gem install rubocop rubocop-rails rubocop-rspec && rubocop
       - name: Run tests
         run: bundler exec rails test
