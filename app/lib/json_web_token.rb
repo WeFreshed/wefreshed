@@ -14,7 +14,5 @@ module JsonWebToken
     body ? (HashWithIndifferentAccess.new body[0]) : (return false)
   rescue JWT::ExpiredSignature
     false
-  rescue JWT::DecodeError
-    false
   end
 end
