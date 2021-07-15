@@ -46,3 +46,12 @@ export interface IStore {
   user: IUser | null
   posts: IPost[]
 }
+
+export interface IFetchError {
+  ok: boolean
+  redirected: boolean
+  status: number
+  statusText: string
+  type: string
+  url: string
+}

@@ -11,6 +11,8 @@ AllCops:
     - 'spec/**/*'
     - 'tmp/**/*'
     - 'client/**/*'
+  TargetRubyVersion: 2.7.2
+  NewCops: enable
 
 Rails:
   Enabled: true

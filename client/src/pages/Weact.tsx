@@ -18,8 +18,9 @@ import {
   arrowForwardCircleOutline,
   arrowBackCircleOutline,
 } from 'ionicons/icons'
+import { useHistory } from 'react-router'
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { IPost, Direction } from '../types'
+import { IPost, Direction, IFetchError } from '../types'
 import { LocationContext } from '../context'
 import * as Api from '../services/api'
 
@@ -31,6 +32,7 @@ const Page: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([])
   const [currentPost, setCurrentPost] = useState<IPost | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const { push } = useHistory<{ action: string }>()
   const location = useContext(LocationContext)
   const content = useRef<HTMLIonContentElement | null>(null)
   const cardElem = useRef<HTMLDivElement | null>(null)
@@ -46,13 +48,20 @@ const Page: React.FC = () => {
     }
   }
 
+  const handleError = (err: IFetchError) => {
+    if (err.status === 401) {
+      push('/')
+    } else {
+      setError('Something went wrong 😞')
+    }
+  }
+
   const getPosts = async () => {
     try {
       setError(null)
-      const fetchedPosts = await Api.getPosts()
-      return fetchedPosts
+      return await Api.getPosts()
     } catch (err) {
-      setError('Something went wrong 😞')
+      handleError(err)
     }
   }
 
@@ -76,7 +85,7 @@ const Page: React.FC = () => {
         await Api.createWeaction(params)
         _setPosts(posts)
       } catch (err) {
-        console.log(error)
+        handleError(err)
       }
     }
   }
@@ -145,12 +154,6 @@ const Page: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen ref={content} scrollY={false}>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Weact</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <motion.div
           ref={cardElem}
           drag
