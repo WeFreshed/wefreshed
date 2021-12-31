@@ -18,6 +18,6 @@ class ApplicationController < ActionController::API
 
   def decoded_token
     token = cookies.signed[:jwt]
-    JsonWebToken.decode(token)
+    JsonWebToken.decode(token) if token
   end
 end
