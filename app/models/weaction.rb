@@ -4,7 +4,7 @@ class Weaction < ApplicationRecord
   belongs_to :post
   belongs_to :user
 
-  validates :emotion_id, :post_id, :user_id, presence: true
+  validates :emotion_id, presence: true
   validates :user_id, numericality: { only_integer: true }
   validates :emotion_id, numericality: {
     only_integer: true,
