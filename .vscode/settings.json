@@ -11,5 +11,5 @@
   "eslint.lintTask.enable": true,
   "eslint.debug": true,
   "eslint.alwaysShowStatus": true,
-  "ruby.rubocop.executePath": "/Users/dhey/.rvm/gems/ruby-2.7.2/bin/"
+  "ruby.rubocop.executePath": "/Users/dhey/.gem/ruby/2.7.2/bin/"
 }
