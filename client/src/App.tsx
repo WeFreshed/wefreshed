@@ -3,6 +3,7 @@ import Posts from './pages/Posts'
 import User from './pages/User'
 import NewPost from './pages/NewPost'
 import Weact from './pages/Weact'
+import Welcome from './pages/Welcome'
 import React, { useEffect, useState, useReducer } from 'react'
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react'
 import { IonReactHashRouter } from '@ionic/react-router'
@@ -77,6 +78,7 @@ const App: React.FC = () => {
                 <Route path="/posts" component={Posts} exact />
                 <Route path="/weact" component={Weact} exact />
                 <Route path="/user" component={User} exact />
+                <Route path="/welcome" component={Welcome} exact />
                 <Redirect from="/" to="/posts" exact />
               </IonRouterOutlet>
             </IonSplitPane>
