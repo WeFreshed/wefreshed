@@ -2,10 +2,11 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    tags:
+      - '*'
 
 jobs:
-  notify:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
