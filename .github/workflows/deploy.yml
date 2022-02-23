@@ -1,0 +1,19 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ['Node', 'Ruby']
+    types: [completed]
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_STAGING_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
