@@ -30,7 +30,7 @@ const User: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">User</IonTitle>
+            <IonTitle size="large">User [Test]</IonTitle>
           </IonToolbar>
         </IonHeader>
 

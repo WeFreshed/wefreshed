@@ -1,9 +1,7 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows: ['Node', 'Ruby']
-    types: [completed]
+  push:
     branches: [main]
 
 jobs:
