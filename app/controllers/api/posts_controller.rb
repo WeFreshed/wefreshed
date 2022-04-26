@@ -9,7 +9,7 @@ module Api
       if post.save
         render json: post.as_json(only: %i[id text latitude longitude emotion_id is_active])
       else
-        render json: post.errors.full_messages
+        render json: post.errors.full_messages, status: :unprocessable_entity
       end
     end
 

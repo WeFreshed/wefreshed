@@ -6,10 +6,10 @@
   "prettier.prettierPath": "./client/node_modules/prettier/index.js",
   "prettier.singleQuote": true,
   "prettier.semi": false,
-  "editor.formatOnSave": true,
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.debug": true,
   "eslint.alwaysShowStatus": true,
-  "ruby.rubocop.executePath": "/Users/dhey/.gem/ruby/2.7.2/bin/"
+  "ruby.rubocop.executePath": "/Users/dhey/.gem/ruby/2.7.2/bin/",
+  "editor.formatOnSave": true
 }

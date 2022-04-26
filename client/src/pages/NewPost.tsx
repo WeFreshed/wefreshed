@@ -15,6 +15,7 @@ import {
   IonListHeader,
   IonRadio,
   IonRadioGroup,
+  useIonAlert,
 } from '@ionic/react'
 import { useHistory } from 'react-router'
 import React, { useState, useContext } from 'react'
@@ -27,6 +28,7 @@ const NewPost: React.FC = () => {
   const { action, push, goBack } = useHistory<{ action: string }>()
   const location = useContext(LocationContext)
   const { dispatch } = useContext(DataContext)
+  const [present] = useIonAlert()
 
   const initialPost = {
     text: '',
@@ -38,19 +40,29 @@ const NewPost: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    const _post = await createPost({
-      ...post,
-      latitude: location?.latitude,
-      longitude: location?.longitude,
-    })
+    try {
+      const _post = await createPost({
+        ...post,
+        latitude: location?.latitude,
+        longitude: location?.longitude,
+      })
 
-    dispatch({ type: 'ADD_POST', post: _post })
+      dispatch({ type: 'ADD_POST', post: _post })
 
-    setPost(initialPost)
-    if (action === 'PUSH') {
-      goBack()
-    } else {
-      push('/posts')
+      setPost(initialPost)
+      if (action === 'PUSH') {
+        goBack()
+      } else {
+        push('/posts')
+      }
+    } catch (err) {
+      present({
+        cssClass: 'my-css',
+        header: 'Alert',
+        message: 'alert from hook',
+        buttons: ['Cancel', { text: 'Ok', handler: (d) => console.log('ok pressed') }],
+        onDidDismiss: (e) => console.log('did dismiss'),
+      })
     }
   }
 

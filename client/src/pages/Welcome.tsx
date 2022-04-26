@@ -1,11 +1,11 @@
 import React from 'react'
-import { IonSlides, IonSlide, IonContent } from '@ionic/react'
+import { IonSlides, IonSlide, IonContent, IonButton } from '@ionic/react'
 import './Welcome.css'
 
 // Optional parameters to pass to the swiper instance.
 // See http://idangero.us/swiper/api/ for valid options.
 const slideOpts = {
-  initialSlide: 1,
+  initialSlide: 0,
   speed: 400,
 }
 
@@ -13,13 +13,14 @@ const Welcome: React.FC = () => (
   <IonContent>
     <IonSlides pager={true} options={slideOpts}>
       <IonSlide>
-        <h1>Slide 1</h1>
+        <h1>Welcome</h1>
       </IonSlide>
       <IonSlide>
-        <h1>Slide 2</h1>
+        <h1>Here's how it works</h1>
       </IonSlide>
-      <IonSlide>
-        <h1>Slide 3</h1>
+      <IonSlide style={{ flexDirection: 'column' }}>
+        <h1>Are you ready to get started?</h1>
+        <IonButton routerLink="/posts/new">Create your first post</IonButton>
       </IonSlide>
     </IonSlides>
   </IonContent>
