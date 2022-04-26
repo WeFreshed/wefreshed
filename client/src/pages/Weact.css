@@ -1,5 +1,5 @@
 .weact-height {
-  height: calc(100% - (var(--offset-top) + var(--offset-bottom)));
+  height: calc(100% - var(--offset-bottom));
 }
 
 .full-height {

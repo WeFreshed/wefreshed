@@ -61,7 +61,7 @@ const Page: React.FC = () => {
       setError(null)
       return await Api.getPosts()
     } catch (err) {
-      handleError(err)
+      handleError(err as IFetchError)
     }
   }
 
@@ -85,7 +85,7 @@ const Page: React.FC = () => {
         await Api.createWeaction(params)
         _setPosts(posts)
       } catch (err) {
-        handleError(err)
+        handleError(err as IFetchError)
       }
     }
   }

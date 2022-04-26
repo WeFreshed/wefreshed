@@ -52,7 +52,7 @@ export const createPost = (post: IPostParams) => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((response) => {
+  }).then(async (response) => {
     if (response.ok) {
       return response.json()
     } else {

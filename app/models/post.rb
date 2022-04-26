@@ -10,4 +10,6 @@ class Post < ApplicationRecord
     less_than_or_equal_to: 4,
     message: 'can only be whole number between 1 and 4.'
   }
+
+  validates :text, presence: true, length: { maximum: 140 }
 end
