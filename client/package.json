@@ -61,7 +61,7 @@
     "@capacitor/cli": "2.4.6",
     "@types/react-dom": "^18.0.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.3.2"
   },
   "description": "An Ionic project"
