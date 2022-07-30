@@ -5,9 +5,17 @@ import {
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
+  IonText,
 } from '@ionic/react'
 import { deletePost, updatePost } from '../services/api'
 import { IPost } from '../types'
+
+const emotions = {
+  1: '😂',
+  2: '😢',
+  3: '😠',
+  4: '🥱',
+}
 
 interface PostProps {
   post: IPost
@@ -44,10 +52,11 @@ const Post: React.FC<PostProps> = ({ post, dispatch }) => {
 
   return (
     <IonItemSliding ref={ref}>
-      <IonItem>
-        <IonLabel>{post.text}</IonLabel>
-        <p>{post.emotion_id}</p>
-        <p>{post.is_active ? 'active' : 'not active'}</p>
+      <IonItem disabled={!post.is_active}>
+        <IonText slot="start">{emotions[post.emotion_id]}</IonText>
+        <IonLabel>
+          <IonText>{post.text}</IonText>
+        </IonLabel>
       </IonItem>
 
       <IonItemOptions side="end">

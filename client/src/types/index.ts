@@ -17,10 +17,12 @@ export interface IUser {
   longitude: number
 }
 
+export type EmotionId = 1 | 2 | 3 | 4
+
 export interface IPost {
   id: number
   text: string
-  emotion_id: number | null
+  emotion_id: EmotionId
   latitude: number
   longitude: number
   is_active: boolean
