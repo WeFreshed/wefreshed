@@ -11,6 +11,7 @@ import {
   IonFooter,
   IonButton,
   IonIcon,
+  useIonAlert,
 } from '@ionic/react'
 import {
   arrowDownCircleOutline,
@@ -38,6 +39,7 @@ const Page: React.FC = () => {
   const cardElem = useRef<HTMLDivElement | null>(null)
   const x = useMotionValue(0)
   const controls = useAnimation()
+  const [presentAlert] = useIonAlert()
 
   const _setPosts = (posts: IPost[]) => {
     const [_post, ..._posts] = posts
@@ -77,12 +79,22 @@ const Page: React.FC = () => {
     if (currentPost) {
       const params = {
         post_id: currentPost.id,
+        poster_id: currentPost.user_id,
         direction,
         latitude: location.latitude,
         longitude: location.longitude,
       }
       try {
-        await Api.createWeaction(params)
+        const weaction = await Api.createWeaction(params)
+        if (weaction.is_weef) {
+          presentAlert({
+            header: 'Weef Alert',
+            subHeader: "You've created a Weef!",
+            message: 'You can view you Weef on the Week page.',
+            buttons: ['OK'],
+          })
+        }
+
         _setPosts(posts)
       } catch (err) {
         handleError(err as IFetchError)

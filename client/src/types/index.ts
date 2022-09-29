@@ -21,6 +21,7 @@ export type EmotionId = 1 | 2 | 3 | 4
 
 export interface IPost {
   id: number
+  user_id: number
   text: string
   emotion_id: EmotionId
   latitude: number

@@ -16,6 +16,8 @@ import {
   IonRadio,
   IonRadioGroup,
   useIonAlert,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/react'
 import { useHistory } from 'react-router'
 import React, { useState, useContext } from 'react'
@@ -121,22 +123,22 @@ const NewPost: React.FC = () => {
               </IonListHeader>
 
               <IonItem>
-                <IonLabel>Happy</IonLabel>
+                <IonLabel>🙂</IonLabel>
                 <IonRadio slot="end" value={1} />
               </IonItem>
 
               <IonItem>
-                <IonLabel>Amused</IonLabel>
+                <IonLabel>😢</IonLabel>
                 <IonRadio slot="end" value={2} />
               </IonItem>
 
               <IonItem>
-                <IonLabel>Angry</IonLabel>
+                <IonLabel>😠</IonLabel>
                 <IonRadio slot="end" value={3} />
               </IonItem>
 
               <IonItem>
-                <IonLabel>Meh</IonLabel>
+                <IonLabel>🥱</IonLabel>
                 <IonRadio slot="end" value={4} />
               </IonItem>
             </IonRadioGroup>

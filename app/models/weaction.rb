@@ -13,39 +13,37 @@ class Weaction < ApplicationRecord
     message: 'can only be whole number between 1 and 4.'
   }
 
-  after_create :update_is_match
+  before_create :update_is_match
 
   def update_is_match
     return unless match?
 
     self.is_match = true
-    save
   end
 
   def match?
     emotion_id == post.emotion_id
   end
 
-  def weef?(post)
-    matched_weaction = Weaction.joins(sql(post)).first || false
-
+  def weef?(poster_id)
+    matched_weaction = Weaction.joins(sql(poster_id)).first || false
     return false unless matched_weaction
 
-    weef = Weef.create(weactor_id: id, weactee_id: matched_weaction.id)
-    matched_weaction.update(is_active: false, weef_id: weef.id)
-    update(is_active: false, weef_id: weef.id)
+    Weef.create(weactor_id: user_id, weactee_id: poster_id)
+    matched_weaction.update(is_active: false)
+    update(is_active: false)
 
     true
   end
 
-  def sql(post)
-    `%{
+  def sql(poster_id)
+    %(
       INNER JOIN posts
       ON weactions.post_id = posts.id
       WHERE weactions.is_match = 't'
       AND weactions.is_active = 't'
-      AND weactions.user_id = #{post.user_id}
+      AND weactions.user_id = #{poster_id}
       AND posts.user_id = #{user_id}
-    }`
+    )
   end
 end

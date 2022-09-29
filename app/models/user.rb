@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :weactions, dependent: :destroy
 
+  has_many :weactor_weefs, dependent: :destroy, class_name: 'Weef', foreign_key: 'weactor_id', inverse_of: :weactor
+  has_many :weactee_weefs, dependent: :destroy, class_name: 'Weef', foreign_key: 'weactee_id', inverse_of: :weactee
+
   validates :device_id, presence: true, allow_nil: false
 
   def self.handle_login(device_id)
@@ -23,5 +26,9 @@ class User < ApplicationRecord
       user.save
     end
     user
+  end
+
+  def weefs
+    weactee_weefs + weactor_weefs
   end
 end

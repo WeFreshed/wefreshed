@@ -11,7 +11,7 @@ import { deletePost, updatePost } from '../services/api'
 import { IPost } from '../types'
 
 const emotions = {
-  1: '😂',
+  1: '🙂',
   2: '😢',
   3: '😠',
   4: '🥱',

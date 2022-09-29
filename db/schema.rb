@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_212613) do
+ActiveRecord::Schema.define(version: 2022_09_29_202532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2021_02_06_212613) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_match", default: false
+    t.boolean "is_active", default: true
+  end
+
+  create_table "weefs", force: :cascade do |t|
+    t.boolean "is_active", default: true
+    t.bigint "weactor_id", null: false
+    t.bigint "weactee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["weactee_id"], name: "index_weefs_on_weactee_id"
+    t.index ["weactor_id"], name: "index_weefs_on_weactor_id"
   end
 
 end

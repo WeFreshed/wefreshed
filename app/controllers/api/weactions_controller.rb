@@ -5,9 +5,10 @@ module Api
     before_action :authenticate_cookie
 
     def create
-      weaction = Weaction.new(weaction_params)
+      weaction = Weaction.new(weaction_params.except(:poster_id))
       if weaction.save
-        render json: weaction.as_json(only: :id)
+        is_weef = weaction.is_match ? weaction.weef?(weaction_params[:poster_id]) : false
+        render json: { weaction_id: weaction.id, is_weef: is_weef }
       else
         render json: weaction.errors.full_messages
       end
@@ -18,10 +19,11 @@ module Api
     def weaction_params
       params
         .require(:weaction)
-        .permit(:post_id, :direction)
+        .permit(:post_id, :direction, :poster_id)
         .merge(
           user_id: current_user.id,
-          emotion_id: emotion_id_from_direction
+          emotion_id: emotion_id_from_direction,
+          poster_id: params[:poster_id]
         )
     end
 
