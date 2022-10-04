@@ -11,7 +11,7 @@ module JsonWebToken
 
   def self.decode(token)
     body = JWT.decode(token, JWT_SECRET)
-    body ? (HashWithIndifferentAccess.new body[0]) : (return false)
+    body ? (ActiveSupport::HashWithIndifferentAccess.new body[0]) : (return false)
   rescue JWT::ExpiredSignature
     false
   end
